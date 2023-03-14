@@ -68,6 +68,19 @@ parser.add_argument(
     help="increment verbosity level",
 )
 
+parser.add_argument(
+    "-s",
+    "--tls-skip-verify",
+    action="store_true",
+    help="skip validating homeserver certificate (i.e., if it is self-signed).\
+            Optional. Environment variable: `TLS_SKIP_VERIFY`",
+    **(
+        {"default": os.environ["TLS_SKIP_VERIFY"]}
+        if "TLS_SKIP_VERIFY" in os.environ else {}
+    ),
+)
+
+
 args = parser.parse_args()
 
 SERVER_ADDRESS = (args.host, args.port)
@@ -77,3 +90,4 @@ MATRIX_PW = args.matrix_pw
 MATRIX_TOKEN = args.matrix_token
 API_KEY = args.api_key
 VERBOSE = args.verbose
+TLS_SKIP_VERIFY = args.tls_skip_verify

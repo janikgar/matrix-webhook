@@ -15,7 +15,7 @@ ERROR_MAP = {
     "M_CONSENT_NOT_GIVEN": HTTPStatus.FORBIDDEN,
 }
 LOGGER = logging.getLogger("matrix_webhook.utils")
-CLIENT = AsyncClient(conf.MATRIX_URL, conf.MATRIX_ID)
+CLIENT = AsyncClient(conf.MATRIX_URL, conf.MATRIX_ID, ssl=False if conf.TLS_SKIP_VERIFY else True)
 
 
 def error_map(resp):
